@@ -1,3 +1,4 @@
+/* Data Access Object (DAO) module for accessing Users */
 "use strict";
 
 const { db } = require("../db");
@@ -37,7 +38,6 @@ exports.getUser = (email, password) => {
             resolve(false);
           else resolve(user);
         });
-        // resolve(user);
       }
     });
   });

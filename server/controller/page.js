@@ -1,3 +1,5 @@
+"use strict";
+
 const pageDao = require("../services/page-dao");
 const { validationResult } = require("express-validator");
 
@@ -58,7 +60,6 @@ exports.addPage = async (req, res, next) => {
       author: req.user.id,
       content: req.body.content,
     };
-
     const doc = await pageDao.addPage(newPageObject);
     res.json({ status: true, data: doc });
   } catch (error) {

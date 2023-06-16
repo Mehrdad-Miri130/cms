@@ -1,3 +1,6 @@
+/* Data Access Object (DAO) module for accessing Pages */
+"use strict";
+
 const { db } = require("../db");
 const { Page } = require("../model/PageModel");
 
