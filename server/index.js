@@ -24,14 +24,11 @@ const port = 3000,
 
 app.use(morgan("dev"));
 //app.use(cors(corsOptions));
+app.disable("x-powered-by");
+app.enable("trust proxy");
+//app.use(cors());
 app.use(cors({
-  "origin": "*",
-  "methods": "*",
-  "preflightContinue": false,allowedHeaders: [
-    'Content-Type',
-  ],
-  "credentials": true,
-  "optionsSuccessStatus": 200
+  "credentials": true
 }));
 app.use(express.json({ limit: "200kb" }));
 app.use(express.static(path.join(__dirname, "public")));
