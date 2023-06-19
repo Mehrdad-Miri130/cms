@@ -26,7 +26,7 @@ app.use(morgan("dev"));
 //app.use(cors(corsOptions));
 app.use(cors({
   "origin": "*",
-  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "methods": "*",
   "preflightContinue": false,
   "credentials": true,
   "optionsSuccessStatus": 200
