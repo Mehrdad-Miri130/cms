@@ -21,8 +21,7 @@ const port = 3000,
   app = express();
 
 // set up middlewares
-
-app.use(morgan("dev"));
+//app.use(morgan("dev"));
 //app.use(cors(corsOptions));
 app.disable("x-powered-by");
 app.enable("trust proxy");
@@ -30,6 +29,7 @@ app.enable("trust proxy");
 app.use(cors({
   "credentials": true
 }));
+app.use(morgan("dev"));
 app.use(express.json({ limit: "200kb" }));
 app.use(express.static(path.join(__dirname, "public")));
 // http://localhost:port/images/img-1.jpg
