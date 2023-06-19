@@ -18,11 +18,6 @@ const sessions = require("./router/sessions");
 const pages = require("./router/pages");
 // init
 const port = 3000,
-  corsOptions = {
-    origin: "http://localhost:5173",
-    optionsSuccessStatus: 200,
-    credentials: true,
-  },
   app = express();
 
 // set up middlewares
@@ -33,7 +28,8 @@ app.use(cors({
   "origin": "*",
   "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
   "preflightContinue": false,
-  "optionsSuccessStatus": 204
+  "credentials": true,
+  "optionsSuccessStatus": 200
 }));
 app.use(express.static(path.join(__dirname, "public")));
 // http://localhost:port/images/img-1.jpg
