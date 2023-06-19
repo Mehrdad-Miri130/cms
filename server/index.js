@@ -27,7 +27,9 @@ app.use(morgan("dev"));
 app.use(cors({
   "origin": "*",
   "methods": "*",
-  "preflightContinue": false,
+  "preflightContinue": false,allowedHeaders: [
+    'Content-Type',
+  ],
   "credentials": true,
   "optionsSuccessStatus": 200
 }));
