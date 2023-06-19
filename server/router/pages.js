@@ -10,24 +10,29 @@ router
     auth.isLoggedIn,
     auth.restrictToAdmin,
     [
+      check("image").notEmpty().isString(),
+      check("orders").notEmpty().isString(),
       check("title").notEmpty().isString(),
       check("author").notEmpty().isNumeric(),
       check("content").notEmpty().isString(),
-      check("publishedAt").isString(),
+      check("publishedAt").isDate({ format: "YYYY-MM-DD", strictMode: true }),
     ],
     controller.addPageByAdmin
   );
 
 router
   .route("/by-admin/:id")
+
   .patch(
     auth.isLoggedIn,
     auth.restrictToAdmin,
     [
+      check("image").notEmpty().isString(),
+      check("orders").notEmpty().isString(),
       check("title").notEmpty().isString(),
       check("author").notEmpty().isNumeric(),
       check("content").notEmpty().isString(),
-      check("publishedAt").isString(),
+      check("publishedAt").isDate({ format: "YYYY-MM-DD", strictMode: true }),
     ],
     controller.updatePageByAdmin
   )
@@ -39,9 +44,11 @@ router
   .post(
     auth.isLoggedIn,
     [
+      check("image").notEmpty().isString(),
+      check("orders").notEmpty().isString(),
       check("title").notEmpty().isString(),
       check("content").notEmpty().isString(),
-      check("publishedAt").isString(),
+      check("publishedAt").isDate({ format: "YYYY-MM-DD", strictMode: true }),
     ],
     controller.addPage
   );
@@ -52,9 +59,11 @@ router
   .patch(
     auth.isLoggedIn,
     [
+      check("image").notEmpty().isString(),
+      check("orders").notEmpty().isString(),
       check("title").notEmpty().isString(),
       check("content").notEmpty().isString(),
-      check("publishedAt").isString(),
+      check("publishedAt").isDate({ format: "YYYY-MM-DD", strictMode: true }),
     ],
     controller.updatePageByUser
   )

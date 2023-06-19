@@ -1,30 +1,12 @@
-/* Data Access Object (DAO) module for accessing Pages */
-"use strict";
-
 const { db } = require("../db");
-const { Page } = require("../model/PageModel");
 
 exports.pageList = () => {
   return new Promise((resolve, reject) => {
-    const sql =
-      "SELECT * FROM pages WHERE publishedAt != 'null' ORDER BY publishedAt ASC";
+    const currentDate = new Date().toISOString().split("T")[0];
+    const sql = `SELECT pages.title,pages.publishedAt,pages.id as pageId,pages.createdAt,pages.author as authorId,user.email as authorEmail FROM pages INNER JOIN user ON pages.author=user.id WHERE publishedAt NOT NULL AND publishedAt<='${currentDate}' ORDER BY publishedAt DESC;`;
     db.all(sql, [], (err, rows) => {
-      if (err) {
-        console.log(err);
-        reject(err);
-      }
-      const pages = rows.map(
-        (q) =>
-          new Page(
-            q.id,
-            q.title,
-            q.author,
-            q.createdAt,
-            q.content,
-            q.publishedAt
-          )
-      );
-      resolve(pages);
+      if (err) reject(err);
+      resolve(rows);
     });
   });
 };
@@ -50,15 +32,12 @@ exports.deleteOneByAdmin = (id) => {
 
 exports.getOne = (id) => {
   return new Promise((resolve, reject) => {
-    const sql = "SELECT * FROM pages WHERE id=?";
-    db.query(sql, [id], (err, row) => {
-      if (err) {
-        console.log(err);
-        reject(false);
-      }
-      resolve(
-        new Page(row.id, row.title, row.author, row.createdAt, row.publishedAt)
-      );
+    const sql =
+      "SELECT pages.*,user.email as authorEmail FROM pages INNER JOIN user ON pages.author=user.id WHERE pages.id=?;";
+    db.get(sql, [id], (err, row) => {
+      if (err) reject(err);
+      else if (row === undefined) resolve(false);
+      else resolve(row);
     });
   });
 };
@@ -67,12 +46,18 @@ exports.getOne = (id) => {
 exports.addPage = (info) => {
   return new Promise((resolve, reject) => {
     const sql =
-      "INSERT INTO pages(title,content, author, publishedAt) VALUES (?,?, ?, ?)";
+      "INSERT INTO pages(title, orders, image, content, author, publishedAt) VALUES (?,?,?,?,?,DATE(?))";
     db.run(
       sql,
-      [info.title, info.content, info.author, info.publishedAt],
+      [
+        info.title,
+        info.orders,
+        info.image,
+        info.content,
+        info.author,
+        info.publishedAt,
+      ],
       function (err) {
-        console.log("error in insert", err);
         if (err) reject(err);
         else resolve(this.lastID);
       }
@@ -83,10 +68,18 @@ exports.addPage = (info) => {
 exports.updatePageByUser = (author, id, page) => {
   return new Promise((resolve, reject) => {
     const sql =
-      "UPDATE pages SET title=?, content=?, publishedAt=? WHERE id=? AND author=?";
+      "UPDATE pages SET title=?, image=?, orders=?, content=?, publishedAt=DATE(?) WHERE id=? AND author=?";
     db.run(
       sql,
-      [page.title, page.content, page.publishedAt, id, author],
+      [
+        page.title,
+        page.image,
+        page.orders,
+        page.content,
+        page.publishedAt,
+        id,
+        author,
+      ],
       function (err) {
         if (err) {
           console.log(err);
@@ -99,10 +92,18 @@ exports.updatePageByUser = (author, id, page) => {
 exports.updatePageByAdmin = (id, page) => {
   return new Promise((resolve, reject) => {
     const sql =
-      "UPDATE pages SET title=?, content=?, author=?, publishedAt=? WHERE id=?";
+      "UPDATE pages SET title=?,image=?, orders=?, content=?, author=?, publishedAt=DATE(?) WHERE id=?";
     db.run(
       sql,
-      [page.title, page.content, page.author, page.publishedAt, id],
+      [
+        page.title,
+        page.image,
+        page.orders,
+        page.content,
+        page.author,
+        page.publishedAt,
+        id,
+      ],
       function (err) {
         if (err) {
           console.log(err);

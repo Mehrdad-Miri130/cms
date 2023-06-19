@@ -1,5 +1,3 @@
-"use strict";
-
 const passport = require("passport");
 
 exports.getCurrent = (req, res) => {
