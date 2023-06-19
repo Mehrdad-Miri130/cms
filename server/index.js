@@ -29,7 +29,12 @@ const port = 3000,
 app.use(express.json({ limit: "200kb" }));
 app.use(morgan("dev"));
 //app.use(cors(corsOptions));
-app.use(cors());
+app.use(cors({
+  "origin": "*",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "preflightContinue": false,
+  "optionsSuccessStatus": 204
+}));
 app.use(express.static(path.join(__dirname, "public")));
 // http://localhost:port/images/img-1.jpg
 // http://localhost:port/images/img-2.jpg
