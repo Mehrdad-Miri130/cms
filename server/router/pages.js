@@ -4,8 +4,11 @@ const express = require("express");
 const { check } = require("express-validator");
 const router = express.Router();
 
+router.get("/my-blog", auth.isLoggedIn, controller.getAllMyBlogs);
+
 router
   .route("/by-admin")
+  .get(auth.isLoggedIn, auth.restrictToAdmin, controller.getAllPagesByAdmin)
   .post(
     auth.isLoggedIn,
     auth.restrictToAdmin,
@@ -22,7 +25,6 @@ router
 
 router
   .route("/by-admin/:id")
-
   .patch(
     auth.isLoggedIn,
     auth.restrictToAdmin,
@@ -40,7 +42,7 @@ router
 
 router
   .route("/")
-  .get(controller.getAllPages)
+  .get(controller.getIndex)
   .post(
     auth.isLoggedIn,
     [

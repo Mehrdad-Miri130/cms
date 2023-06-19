@@ -1,9 +1,31 @@
 const pageDao = require("../services/page-dao");
 const { validationResult } = require("express-validator");
 
-exports.getAllPages = async (req, res, next) => {
+exports.getIndex = async (req, res, next) => {
   try {
     const docs = await pageDao.pageList();
+    res.json({ status: true, data: docs });
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ status: false, error: "server error, please try later" });
+  }
+};
+exports.getAllPagesByAdmin = async (req, res, next) => {
+  try {
+    const docs = await pageDao.pageListByAdmin();
+    res.json({ status: true, data: docs });
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ status: false, error: "server error, please try later" });
+  }
+};
+exports.getAllMyBlogs = async (req, res, next) => {
+  try {
+    const docs = await pageDao.getAllMyBlogs(req.user.id);
     res.json({ status: true, data: docs });
   } catch (error) {
     console.log(error);
