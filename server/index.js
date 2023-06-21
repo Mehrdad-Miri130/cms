@@ -14,7 +14,6 @@ const session = require("express-session");
 
 // express router
 const sessions = require("./router/sessions");
-// const user = require("./router/user");
 const pages = require("./router/pages");
 // init
 const port = 3000,
