@@ -15,19 +15,18 @@ const session = require("express-session");
 // express router
 const sessions = require("./router/sessions");
 const pages = require("./router/pages");
+
 // init
 const port = 3000,
   app = express();
 
 // set up middlewares
-//app.use(morgan("dev"));
-//app.use(cors(corsOptions));
 app.disable("x-powered-by");
-app.enable("trust proxy");
-//app.use(cors());
-app.use(cors({
-  "credentials": true
-}));
+app.use(
+  cors({
+    credentials: true,
+  })
+);
 app.use(morgan("dev"));
 app.use(express.json({ limit: "200kb" }));
 app.use(express.static(path.join(__dirname, "public")));
@@ -73,10 +72,11 @@ app.use(passport.authenticate("session"));
 app.use("/api/sessions", sessions);
 app.use("/api/pages", pages);
 
+// not found
 app.all("*", (_req, _resp, _next) => {
   _resp
     .status(404)
-    .json({ status: false, message: "url not found on this server" });
+    .send({ status: false, message: "url not found on this server" });
 });
 
 app.listen(port, () => {

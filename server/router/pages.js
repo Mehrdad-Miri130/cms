@@ -3,9 +3,9 @@ const auth = require("../controller/auth");
 const express = require("express");
 const { check } = require("express-validator");
 const router = express.Router();
-
+// http://localhost:3000/api/pages/my-blog
 router.get("/my-blog", auth.isLoggedIn, controller.getAllMyBlogs);
-
+// http://localhost:3000/api/pages/by-admin
 router
   .route("/by-admin")
   .get(auth.isLoggedIn, auth.restrictToAdmin, controller.getAllPagesByAdmin)
@@ -22,7 +22,7 @@ router
     ],
     controller.addPageByAdmin
   );
-
+// http://localhost:3000/api/pages/by-admin/1
 router
   .route("/by-admin/:id")
   .patch(
@@ -39,7 +39,7 @@ router
     controller.updatePageByAdmin
   )
   .delete(auth.isLoggedIn, auth.restrictToAdmin, controller.deleteOneByAdmin);
-
+// http://localhost:3000/api/pages
 router
   .route("/")
   .get(controller.getIndex)
@@ -54,7 +54,7 @@ router
     ],
     controller.addPage
   );
-
+// http://localhost:3000/api/pages/2
 router
   .route("/:id")
   .get(controller.getOne)

@@ -71,7 +71,6 @@ exports.deleteOneByAdmin = async (req, res, next) => {
 
 exports.getOne = async (req, res, next) => {
   try {
-    console.log("hello");
     const doc = await pageDao.getOne(req.params.id);
     if (!doc)
       return res.status(404).json({
@@ -101,8 +100,8 @@ exports.addPage = async (req, res, next) => {
       orders: req.body.orders,
       image: req.body.image,
     };
-    const doc = await pageDao.addPage(newPageObject);
-    res.json({ status: true, data: doc });
+    const lastID = await pageDao.addPage(newPageObject);
+    res.json({ status: true, data: lastID });
   } catch (error) {
     console.log(error);
     res
@@ -143,6 +142,7 @@ exports.updatePageByUser = async (req, res, next) => {
       return res.status(422).json({ errors: errors.array() });
     req.body.publishedAt =
       req.body.publishedAt === "0001-01-01" ? null : req.body.publishedAt;
+    // condition ? 1 : 2 ;
     await pageDao.updatePageByUser(req.user.id, req.params.id, req.body);
     res.json({ status: true });
   } catch (error) {

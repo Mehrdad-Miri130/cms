@@ -3,16 +3,6 @@
 const { db } = require("../db");
 const crypto = require("crypto");
 
-exports.userList = () => {
-  return new Promise((resolve, reject) => {
-    const sql = "SELECT * FROM user";
-    db.all(sql, [], (err, rows) => {
-      if (err) reject(err);
-      resolve(rows);
-    });
-  });
-};
-
 exports.getUser = (email, password) => {
   return new Promise((resolve, reject) => {
     const sql = "SELECT * FROM user WHERE email = ?";
@@ -38,22 +28,6 @@ exports.getUser = (email, password) => {
           else resolve(user);
         });
         // resolve(user);
-      }
-    });
-  });
-};
-
-exports.getUserById = (id) => {
-  return new Promise((resolve, reject) => {
-    const sql = "SELECT * FROM user WHERE id = ?";
-    db.get(sql, [id], (err, row) => {
-      if (err) {
-        reject(err);
-      } else if (row === undefined) {
-        resolve({ error: "User not found!" });
-      } else {
-        const user = { id: row.id, username: row.email, name: row.name };
-        resolve(user);
       }
     });
   });

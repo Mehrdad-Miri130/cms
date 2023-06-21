@@ -19,10 +19,10 @@ exports.pageListByAdmin = () => {
     });
   });
 };
-exports.getAllMyBlogs = (id) => {
+exports.getAllMyBlogs = (author) => {
   return new Promise((resolve, reject) => {
     const sql = `SELECT * FROM pages WHERE author=? ORDER BY createdAt DESC;`;
-    db.all(sql, [id], (err, rows) => {
+    db.all(sql, [author], (err, rows) => {
       if (err) reject(err);
       resolve(rows);
     });
@@ -100,7 +100,6 @@ exports.updatePageByUser = (author, id, page) => {
       ],
       function (err) {
         if (err) {
-          console.log(err);
           reject(err);
         } else resolve(this.lastID);
       }
