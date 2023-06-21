@@ -17,17 +17,19 @@ const sessions = require("./router/sessions");
 const pages = require("./router/pages");
 // init
 const port = 3000,
-  corsOptions = {
-    origin: "http://localhost:5173",
-    optionsSuccessStatus: 200,
-    credentials: true,
-  },
   app = express();
 
 // set up middlewares
-app.use(express.json({ limit: "200kb" }));
+//app.use(morgan("dev"));
+//app.use(cors(corsOptions));
+app.disable("x-powered-by");
+app.enable("trust proxy");
+//app.use(cors());
+app.use(cors({
+  "credentials": true
+}));
 app.use(morgan("dev"));
-app.use(cors(corsOptions));
+app.use(express.json({ limit: "200kb" }));
 app.use(express.static(path.join(__dirname, "public")));
 // http://localhost:port/images/img-1.jpg
 // http://localhost:port/images/img-2.jpg
