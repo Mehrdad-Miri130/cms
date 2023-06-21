@@ -8,9 +8,9 @@ interface IMainLayout {
 const MainLayout: FC<IMainLayout> = ({ children }) => {
 
 	return (
-		<div className='main-template max-w-[1400px] w-full mx-auto space-y-8'>
+		<div className='main-template max-w-[1400px] w-full mx-auto'>
 			<Header />
-			<div className='main px-8 '>{children}</div>
+			<div className='main px-8 py-10'>{children}</div>
 		</div>
 	);
 };

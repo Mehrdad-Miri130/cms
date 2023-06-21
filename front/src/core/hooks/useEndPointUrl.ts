@@ -10,6 +10,8 @@ const useEndPointUrl = () => {
 
 		// blog
 		ALL_BLOGS: '/api/pages',
+		ALL_BLOGS_ADMIN: '/api/pages/by-admin',
+		MY_BLOGS: '/api/pages/my-blog',
 		SINGLE_BLOG: `/api/pages/${blogId}`,
 	});
 

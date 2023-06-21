@@ -1,7 +1,7 @@
-import BlogList from 'components/Blog/List/BlogList';
+import AdminAllBlogList from 'components/AdminAllBlog/List/AdminAllBlogList';
 
 const AdminPage = () => {
-	return <>admin page</>;
+	return <AdminAllBlogList />;
 };
 
 export default AdminPage;

@@ -11,7 +11,7 @@ const SingeBlog = () => {
 		<div className='space-y-8'>
 			<div className='space-y-3'>
 				<div className='flex justify-between items-center pb-3'>
-					<span>{data?.data.publishedAt}</span>
+					<span>{data?.data.publishedAt || 'Not Publish'}</span>
 					<span>{data?.data.authorEmail}</span>
 				</div>
 

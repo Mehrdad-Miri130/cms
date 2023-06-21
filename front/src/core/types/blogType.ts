@@ -5,6 +5,7 @@ export interface IBlog {
 	image: string;
 	publishedAt: string;
 	pageId: number;
+	id: number;
 	createdAt: string;
 	authorId: number;
 	authorEmail: string;

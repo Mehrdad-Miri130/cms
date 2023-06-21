@@ -1,7 +1,7 @@
-import BlogList from 'components/Blog/List/BlogList';
+import MyBlogList from 'components/MyBlog/List/MyBlogList';
 
 const MyBlogPage = () => {
-	return <>my blog page</>;
+	return <MyBlogList />;
 };
 
 export default MyBlogPage;

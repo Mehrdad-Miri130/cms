@@ -40,8 +40,6 @@ c
 +front/src/core/services/fetch-api/useApi.ts,5/e/5eedac4bfd6bee58f70e1b97e802c06297041cc9
 P
  front/src/core/types/userType.ts,8/7/87ab4e563d072a287d247d1d1d046c759de49201
-n
->front/src/components/Login/hooks/react-query/useLogoutQuery.ts,9/5/95323ca27ff30737d74be581f8f3bc769740f74e
 t
 Dfront/src/core/helpers/queryOnErrorHandler/useQueryOnErrorHandler.ts,a/6/a6a729326c969d481cbb08d2c5bc4ad98fdc2045
 c
@@ -58,8 +56,6 @@ q
 Afront/src/components/Blog/List/hooks/react-query/useGetAllBlog.ts,1/f/1f60332ed90d32411392ce7bb03b066c21fa7cdc
 `
 0front/src/core/hooks/masterQuery/useQueryHook.ts,c/0/c0fc3d30d013bc739ef7372cbc3a8ddf043aa06c
-a
-1front/src/components/_Core/Layouts/MainLayout.tsx,6/9/698387128050ff69d2260f9c6246da20f18c0ad9
 d
 4front/src/core/providers/AppProvider/AppProvider.tsx,1/9/19b6cce1291d57c18d9ba4b4084d478010a75882
 B
@@ -68,25 +64,17 @@ d
 4front/src/core/hooks/react-query/useUserInfoQuery.ts,8/b/8b2c9555417be83a2c4f669937bbc7f0b2140e33
 P
  front/src/core/hooks/useRoute.ts,3/5/35492fa8dabc2a307b9ce44bd9c3db887906f59c
-M
-front/src/pages/AdminPage.tsx,9/d/9d194c76e9b4242b29d7d17c83f21019a6348218
 a
 1front/src/components/_Core/Route/PrivateRoute.tsx,b/8/b8f759d5981914cfe3b4deb07852c6420cc9334e
 L
 front/src/pages/MainPage.tsx,e/7/e73123453e6ad7c7edb9523f3c77575a93ea56c0
-]
--front/src/components/_Core/Layouts/Header.tsx,9/c/9c1946f08bfe2840842eb7764e357862b71b020f
 A
 server/.gitignore,6/8/684633b668b24c06fe5d5ba72b7ed42a437aa655
 C
 front/src/index.css,a/7/a73e0f7f13aa3e020658668becc432a362fb2a88
-N
-front/src/pages/MyBlogPage.tsx,4/3/43b064f4cf93c04c0835c109d93ff0987b4fef1d
 m
 =front/src/components/Login/hooks/react-query/useLoginQuery.ts,a/b/ab9a3e8acec4fadb22fc39871414f660275095c3
 M
 front/src/core/store/index.ts,1/a/1af1ca002a6fe2cb687c03e069a77755957e009d
 A
 front/src/App.tsx,6/d/6d2de672bd1aeac009bfc2c2cf9b0724e463fbca
-P
- front/src/assets/css/global.scss,f/b/fb696499f5eccf755c35b933d0565ca4d31765e4

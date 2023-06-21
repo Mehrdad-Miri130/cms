@@ -17,12 +17,14 @@ const BlogItem: FC<IBlogItem> = ({ image, title, authorEmail, publishedAt }) => 
 
 				<hr />
 
-				<p className='flex justify-between'>
-					<span className='font-bold'>author:</span> <span>{authorEmail}</span>
-				</p>
+				{authorEmail && (
+					<p className='flex justify-between'>
+						<span className='font-bold'>author:</span> <span>{authorEmail}</span>
+					</p>
+				)}
 
 				<p className='flex justify-between'>
-					<span className='font-bold'>publish date:</span> <span>{publishedAt}</span>
+					<span className='font-bold'>publish date:</span> <span>{publishedAt === null ? 'Not Publish' : publishedAt}</span>
 				</p>
 			</div>
 		</div>
