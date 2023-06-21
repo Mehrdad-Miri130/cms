@@ -8,9 +8,6 @@ module.exports = {
 	corePlugins: {
 		preflight: false
 	},
-	theme: {
-		extend: {}
-	},
 
 	plugins: [require('@tailwindcss/line-clamp')]
 };

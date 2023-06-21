@@ -10,7 +10,7 @@ export const useLoginQuery = () => {
 	const { endPointUrls } = useEndPointUrl();
 	const dispatch = useDispatch();
 
-	return useMutationHook([endPointUrls.Login], (data) => api.post(endPointUrls.Login, data), {
+	return useMutationHook([endPointUrls.LOGIN], (data) => api.post(endPointUrls.LOGIN, data), {
 		onSuccess: (res: any) => {
 			Cookies.set('isAuth', 'true');
 			Cookies.set('role', res?.data?.role);

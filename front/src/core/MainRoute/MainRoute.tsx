@@ -11,6 +11,7 @@ import { RootState } from 'core/store';
 const MainPage = lazy(() => import('pages/MainPage'));
 const AdminPage = lazy(() => import('pages/AdminPage'));
 const MyBlogPage = lazy(() => import('pages/MyBlogPage'));
+const SingleBlogPage = lazy(() => import('pages/SingleBlogPage'));
 
 const MainRoute = () => {
 	// hooks
@@ -23,6 +24,12 @@ const MainRoute = () => {
 		{
 			path: routes.HOME.route,
 			element: <MainPage />,
+			isAuthenticated: true,
+			role: true,
+		},
+		{
+			path: routes.SINGLE_BLOG.route,
+			element: <SingleBlogPage />,
 			isAuthenticated: true,
 			role: true,
 		},

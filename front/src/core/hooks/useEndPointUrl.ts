@@ -5,11 +5,12 @@ const useEndPointUrl = () => {
 
 	const endPointUrls = Object.freeze({
 		// auth
-		Login: '/api/sessions',
+		LOGIN: '/api/sessions',
 		CURRENT_USER: '/api/sessions/current',
 
 		// blog
-		AllBlogs: '/api/pages',
+		ALL_BLOGS: '/api/pages',
+		SINGLE_BLOG: `/api/pages/${blogId}`,
 	});
 
 	return { endPointUrls, blogId };
