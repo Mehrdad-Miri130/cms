@@ -5,15 +5,13 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@tanstack/react-query": "^4.29.14",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.36",
     "@types/react": "^18.2.12",
     "@types/react-dom": "^18.2.5",
     "antd": "^5.6.1",
     "axios": "^1.4.0",
+    "dayjs": "^1.11.8",
     "js-cookie": "^3.0.5",
     "query-string": "^8.1.0",
     "react": "^18.2.0",
@@ -30,7 +28,6 @@
   "scripts": {
     "start": "PORT=3002 react-scripts start",
     "build": "PORT=3002 react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

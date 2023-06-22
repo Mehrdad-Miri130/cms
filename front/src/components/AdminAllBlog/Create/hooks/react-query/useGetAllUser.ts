@@ -2,13 +2,13 @@ import { UseQueryResult } from '@tanstack/react-query';
 import useQueryHook from 'core/hooks/masterQuery/useQueryHook';
 import api from 'core/services/fetch-api/useApi';
 import useEndPointUrl from 'core/hooks/useEndPointUrl';
-import { IBlogList } from 'core/types/blogType';
+import { IAuthorList } from 'core/types/userType';
 
-export const useGetAdminAllBlog = () => {
+export const useGetAllUser = () => {
 	// hooks
 	const { endPointUrls } = useEndPointUrl();
 
-	return useQueryHook([endPointUrls.BLOGS_ADMIN()], () => api.get(endPointUrls.BLOGS_ADMIN()), {
+	return useQueryHook([endPointUrls.ALL_USER], () => api.get(endPointUrls.ALL_USER), {
 		select: (res: any) => res.data,
-	}) as UseQueryResult<IBlogList, Error>;
+	}) as UseQueryResult<IAuthorList, Error>;
 };

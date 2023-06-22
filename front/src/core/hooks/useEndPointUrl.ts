@@ -10,9 +10,12 @@ const useEndPointUrl = () => {
 
 		// blog
 		ALL_BLOGS: '/api/pages',
-		ALL_BLOGS_ADMIN: '/api/pages/by-admin',
+		BLOGS_ADMIN: (blogIdParam?: number) => `/api/pages/by-admin${blogIdParam ? `/${blogIdParam}` : ''}`,
 		MY_BLOGS: '/api/pages/my-blog',
-		SINGLE_BLOG: `/api/pages/${blogId}`,
+		SINGLE_BLOG: (blogIdParam?: number) => `/api/pages/${blogIdParam || blogId}`,
+
+		// user
+		ALL_USER: '/api/user',
 	});
 
 	return { endPointUrls, blogId };

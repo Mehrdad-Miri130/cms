@@ -25,6 +25,12 @@ export interface ISingleBlog {
 	authorEmail: string;
 }
 
+export interface IOrder {
+	orderTitle: number;
+	orderImage: number;
+	orderContent: number;
+}
+
 export interface IBlogList extends IGlobalType {
 	data: IBlog[];
 }
