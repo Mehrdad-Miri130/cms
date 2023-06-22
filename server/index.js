@@ -15,6 +15,7 @@ const session = require("express-session");
 // express router
 const sessions = require("./router/sessions");
 const pages = require("./router/pages");
+const user = require("./router/user");
 
 // init
 const port = 3000,
@@ -71,6 +72,7 @@ app.use(passport.authenticate("session"));
 // router
 app.use("/api/sessions", sessions);
 app.use("/api/pages", pages);
+app.use("/api/user", user);
 
 // not found
 app.all("*", (_req, _resp, _next) => {

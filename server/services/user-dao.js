@@ -3,6 +3,16 @@
 const { db } = require("../db");
 const crypto = require("crypto");
 
+exports.userList = () => {
+  return new Promise((resolve, reject) => {
+    const sql = "SELECT email,id FROM user";
+    db.all(sql, [], (err, rows) => {
+      if (err) reject(err);
+      resolve(rows);
+    });
+  });
+};
+
 exports.getUser = (email, password) => {
   return new Promise((resolve, reject) => {
     const sql = "SELECT * FROM user WHERE email = ?";
