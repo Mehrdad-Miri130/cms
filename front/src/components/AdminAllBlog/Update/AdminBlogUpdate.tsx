@@ -70,7 +70,7 @@ const AdminBlogUpdate: FC<IMyBlogUpdate> = ({ hideModal }) => {
 					label='Title Order'
 					rules={[
 						{ required: true, message: 'Enter Value' },
-						{ pattern: /^1|2|3/, message: 'value must be : 1 Or 2 Or 3' },
+						{ pattern: /^[1-3]$/, message: 'value must be : 1 Or 2 Or 3' },
 					]}
 				>
 					<Input />
@@ -82,7 +82,7 @@ const AdminBlogUpdate: FC<IMyBlogUpdate> = ({ hideModal }) => {
 					label='Image Order'
 					rules={[
 						{ required: true, message: 'Enter Value' },
-						{ pattern: /^1|2|3/, message: 'value must be : 1 Or 2 Or 3' },
+						{ pattern: /^[1-3]$/, message: 'value must be : 1 Or 2 Or 3' },
 					]}
 				>
 					<Input />
@@ -94,7 +94,7 @@ const AdminBlogUpdate: FC<IMyBlogUpdate> = ({ hideModal }) => {
 					label='Content Order'
 					rules={[
 						{ required: true, message: 'Enter Value' },
-						{ pattern: /^1|2|3/, message: 'value must be : 1 Or 2 Or 3' },
+						{ pattern: /^[1-3]$/, message: 'value must be : 1 Or 2 Or 3' },
 					]}
 				>
 					<Input />
