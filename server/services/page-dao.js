@@ -12,7 +12,7 @@ exports.pageList = () => {
 };
 exports.pageListByAdmin = () => {
   return new Promise((resolve, reject) => {
-    const sql = `SELECT pages.title,pages.publishedAt,pages.id as pageId,pages.createdAt,pages.author as authorId,user.email as authorEmail FROM pages INNER JOIN user ON pages.author=user.id ORDER BY publishedAt DESC;`;
+    const sql = `SELECT pages.image,pages.title,pages.publishedAt,pages.id as pageId,pages.createdAt,pages.author as authorId,user.email as authorEmail FROM pages INNER JOIN user ON pages.author=user.id ORDER BY publishedAt DESC;`;
     db.all(sql, [], (err, rows) => {
       if (err) reject(err);
       resolve(rows);
