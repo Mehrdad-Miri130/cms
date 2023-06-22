@@ -20,14 +20,14 @@ const user = require("./router/user");
 // init
 const port = 3000,
   app = express();
-
+const corsOptions = {
+  origin: "http://localhost:3002",
+  optionsSuccessStatus: 200,
+  credentials: true,
+};
 // set up middlewares
 app.disable("x-powered-by");
-app.use(
-  cors({
-    credentials: true,
-  })
-);
+app.use(cors(corsOptions));
 app.use(morgan("dev"));
 app.use(express.json({ limit: "200kb" }));
 app.use(express.static(path.join(__dirname, "public")));
