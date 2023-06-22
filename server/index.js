@@ -27,9 +27,9 @@ const corsOptions = {
 };
 // set up middlewares
 app.disable("x-powered-by");
-app.use(express.json({ limit: "200kb" }));
-app.use(morgan("dev"));
 app.use(cors(corsOptions));
+app.use(morgan("dev"));
+app.use(express.json({ limit: "200kb" }));
 app.use(express.static(path.join(__dirname, "public")));
 // http://localhost:port/images/img-1.jpg
 // http://localhost:port/images/img-2.jpg
