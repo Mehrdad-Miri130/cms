@@ -29,7 +29,7 @@ const Header = () => {
 				<div className='flex items-center space-x-5'>
 					<Link to={routes.HOME.link}>Home</Link>
 					{isAuthenticated && <Link to={routes.MY_BLOG.link}>My Blog</Link>}
-					{isAdmin && <Link to={routes.ADMIN.link}>Amin Page</Link>}
+					{isAdmin && <Link to={routes.ADMIN.link}>Admin Page</Link>}
 				</div>
 
 				{isAuthenticated ? (
