@@ -106,3 +106,10 @@
 5. `AdminPage.tsx` : Content of Route `/admin`
 6. `MyBlogPage.tsx` : Content of Route `/my-blog`
 7. `SingleBlogPage.tsx` : Content of Route `/single-blog/:blogId`
+
+## Users Credentials
+
+- ali@gmail.com ,testtest (admin)
+- mohsen@gmail.com, testtest (user)
+- nazanin@gmail.com, testtest (user)
+- satoshi@gmail.com, testtest (user)
