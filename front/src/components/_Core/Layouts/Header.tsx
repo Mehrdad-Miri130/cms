@@ -25,12 +25,14 @@ const Header = () => {
 				<Login hideModal={hideModal} />
 			</Modal>
 
-			<div className='shadow-lg px-8 py-6 flex justify-between'>
+			<div className='shadow-lg px-8 py-6 flex justify-between items-center'>
 				<div className='flex items-center space-x-5'>
 					<Link to={routes.HOME.link}>Home</Link>
 					{isAuthenticated && <Link to={routes.MY_BLOG.link}>My Blog</Link>}
 					{isAdmin && <Link to={routes.ADMIN.link}>Admin Page</Link>}
 				</div>
+
+				<h2 className='m-0'>Farzin CMS</h2>
 
 				{isAuthenticated ? (
 					<div className='flex space-x-3 items-center'>
