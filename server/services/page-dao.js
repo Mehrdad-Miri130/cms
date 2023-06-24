@@ -3,7 +3,7 @@ const { db } = require("../db");
 exports.pageList = () => {
   return new Promise((resolve, reject) => {
     const currentDate = new Date().toISOString().split("T")[0];
-    const sql = `SELECT pages.title,pages.image,pages.publishedAt,pages.id as pageId,pages.createdAt,pages.author as authorId,user.email as authorEmail FROM pages INNER JOIN user ON pages.author=user.id WHERE publishedAt NOT NULL AND publishedAt<='${currentDate}' ORDER BY publishedAt DESC;`;
+    const sql = `SELECT pages.title,pages.image,pages.publishedAt,pages.id as pageId,pages.createdAt,pages.author as authorId,user.email as authorEmail FROM pages INNER JOIN user ON pages.author=user.id WHERE publishedAt NOT NULL AND (publishedAt<'${currentDate}' OR publishedAt='${currentDate}') ORDER BY publishedAt DESC;`;
     db.all(sql, [], (err, rows) => {
       if (err) reject(err);
       resolve(rows);
