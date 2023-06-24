@@ -57,7 +57,7 @@
 
 - GET `/api/pages/my-blog`
   - request parameters in header a valid Cookie
-  - response body content, contains all pages that owned the user.
+  - response body content, contains all pages that owned by the user.
 
 ### 6) Users `for admins`
 
