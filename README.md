@@ -105,6 +105,7 @@ Index page
 ```
 
 * Error responses:  `500 Internal Server Error`
+  
 Get a page by id
 * HTTP method: `GET`  URL: `/api/pages/:id`
 * Description: Get the page corresponding to the id
@@ -157,7 +158,8 @@ Create a page
 }
 ```
 
-* Error responses:  `500 Internal Server Error`, `401 Unauthorized User` 
+* Error responses:  `500 Internal Server Error`, `401 Unauthorized User`
+  
 Update an existing page
 * HTTP method: `PATCH`  URL: `/api/pages/:id`
 * Description: Update the page corresponding to the id
@@ -180,7 +182,8 @@ Update an existing page
     "status": true
 }
 ```
-* Error responses:  `500 Internal Server Error`, `401 Unauthorized User` 
+* Error responses:  `500 Internal Server Error`, `401 Unauthorized User`
+  
 Delete an existing page
 * HTTP method: `DELETE`  URL: `/api/pages/:id`
 * Description: delete the page corresponding to the id
@@ -234,6 +237,7 @@ Create a page
 ```
 
 * Error responses:  `500 Internal Server Error`, `401 Unauthorized User` ,`401 permission deny`,`422 Unprocessable Entity`
+  
 Update a page
 * HTTP method: `PATCH`  URL: `/api/pages/by-admin/:id`
 * Description: update a page corresponding to the id
@@ -260,6 +264,7 @@ Update a page
 ```
 
 * Error responses:  `500 Internal Server Error`, `401 Unauthorized User` ,`401 permission deny`,`422 Unprocessable Entity`
+  
 Delete a page
 * HTTP method: `DELETE`  URL: `/api/pages/by-admin/:id`
 * Description: Delete a page corresponding to the id
