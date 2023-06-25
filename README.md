@@ -394,7 +394,7 @@ Here you can find a list of the users already registered inside the provided dat
 this is a farzin cms website at the top of the screen on the right side we can log in to the user account
 ![App Screenshot](./server/public/screenshot/1.png)
 
-and then you can enter your username and password, the admin has a different username and password
+and then you can enter your email and password, the admin and other users can see the blog 
 ![App Screenshot](./server/public/screenshot/2.png)
 
 you  can see that I log in to my admin page and on the website we have an admin page to edit and delete posts and also change authors for blogs
