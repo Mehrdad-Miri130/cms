@@ -1,7 +1,7 @@
 # Farzin CMS
 
-# Server side
-a express.js application
+# Server-side
+an express.js application
 ## Run Server Project
 
 1. `cd server`
@@ -11,7 +11,7 @@ a express.js application
 ## List of APIs offered by the server
 
 
-Provide a short description for API with the required parameters, follow the proposed structure.
+Provide a short description for API with the required parameters, and follow the proposed structure.
 
 * [HTTP Method] [URL, with any parameter]
 * [One-line about what this API is doing]
@@ -46,10 +46,10 @@ Provide a short description for API with the required parameters, follow the pro
 
 * Error responses:  `500 Internal Server Error` (generic error), `401 Unauthorized User` (login failed)
 
-#### Check if user is logged in
+#### Check if a user is logged in
 
 * HTTP method: `GET`  URL: `/api/sessions/current`
-* Description: check if current user is logged in and get her data
+* Description: check if the current user is logged in and get her data
 * Request body: _None_
 * Response: `200 OK` (success)
 
@@ -79,7 +79,7 @@ Provide a short description for API with the required parameters, follow the pro
 ### 2. Pages `for all without authentication`
 Index page
 * HTTP method: `GET`  URL: `/api/pages`
-* Description: Get the full list of pages that published
+* Description: Get the full list of pages that are published
 * Request body: _None_
 * Response: `200 OK` (success)
 * Response body: Array of objects, each describing one page:
@@ -277,7 +277,7 @@ Delete a page
 ### 5. Pages `for authenticated users and admins`
 my blog
 * HTTP method: `GET`  URL: `/api/pages/my-blog`
-* Description: Get the full list of pages that owned by the user
+* Description: Get the full list of pages owned by the user
 * Request body: _None_
 * Response: `200 OK` (success)
 * Response body: Array of objects, each describing one page:
@@ -350,8 +350,8 @@ my blog
 
 1. Redux-toolkit (Global state management)
 2. React-Query (Api Base Calls)
-3. Antd Design (ui components)
-4. Tailwind (Css Framework)
+3. Antd Design (UI components)
+4. Tailwind (CSS Framework)
 5. React Router (Route Management)
 
 ## Client Project Routes
@@ -364,15 +364,15 @@ my blog
 ## Client Main Folders
 
 1. core folder : contains utils and helpers and reusable hooks and types.
-2. components : contains all components that we use in project
-3. page : contains all routes that has a page in client
+2. components : contains all components that we use in the project
+3. page : contains all routes that have a page in the client
 4. assets : contain css file
 
 ## Client Main Components
 
 1. `MainRoute.tsx` : Manage project route system and contains private route that depends on user roles
 2. `Header.tsx` : Project Navbar
-3. `MainLayout.tsx` : Project Main layout that is same for all routes
+3. `MainLayout.tsx` : Project Main layout that is the same for all routes
 4. `MainPage.tsx` : Content of Route `/`
 5. `AdminPage.tsx` : Content of Route `/admin`
 6. `MyBlogPage.tsx` : Content of Route `/my-blog`
@@ -391,7 +391,7 @@ Here you can find a list of the users already registered inside the provided dat
 ## Screenshots
 
 ### login
-this is a farzin cms website in the top of the screen on the right side we can log in to the user account
+this is a farzin cms website at the top of the screen on the right side we can log in to the user account
 ![App Screenshot](./server/public/screenshot/1.png)
 
 and then you can enter your username and password, the admin has a different username and password
@@ -412,5 +412,5 @@ and this is the part when someone that is not an admin can create a new blog
 this is one of my blogs
 ![App Screenshot](./server/public/screenshot/8.png)
 
-and this is an admin part that can create a blog or editing or deleting, in this part we can also change the author of the blog
+and this is an admin part that can create a blog or edit or deleting, in this part we can also change the author of the blog
 ![App Screenshot](./server/public/screenshot/10.png)
