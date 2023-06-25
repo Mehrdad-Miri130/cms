@@ -1,69 +1,340 @@
 # Farzin CMS
 
 # Server side
-
+a express.js application
 ## Run Server Project
 
 1. `cd server`
 2. `npm install`
 3. `nodemon index.js`
 
-## API Server
+## List of APIs offered by the server
 
-### 1) Authentication
 
-- POST `/api/sessions` (login function)
-  - request parameters in body (email & password)
-  - response body content if email and password is correct return (id,email,role) else API return a message (Incorrect username or password ) with status code 401.
-- GET `/api/sessions/current` (user info)
-  - request parameters in header (a valid Cookie)
-  - response body content (if Cookie is valid API return (id,email,role) else API return an error with message (Not authenticated) with sstatus code 401.)
-- DELETE `/api/sessions/current` (log out)
-  - Response body content (API return empty content with status code 200)
+Provide a short description for API with the required parameters, follow the proposed structure.
 
-### 2) Pages `for all without authentication`
+* [HTTP Method] [URL, with any parameter]
+* [One-line about what this API is doing]
+* [Sample request, with body (if any)]
+* [Sample response, with body (if any)]
+* [Error responses, if any]
 
-- GET `/api/pages` (index page)
-  - response body content, API returns all pages that have been published that contains (pageId,publishedAt,createdAt,authorId,authorEmail,title,image).
-- GET `/api/pages/1`
-  - request parameters in URL, id of the page in URL as a param
-  - response body content (if page exist API return id,title,content,createdAt,publishedAt,author,image,orders,authorEmail)
+### 1. Authentication
+#### Login
 
-### 3) Pages `for authenticated users`
+* HTTP method: `POST`  URL: `/api/sessions`
+* Description: authenticate the user who is trying to login
+* Request body: credentials of the user who is trying to login
 
-- POST `/api/pages`
-  - request parameters in body (title,publishedAt,content,image,orders) and in header a valid Cookie
-  - response body content (Returns the stored ID if the cookie and request body are valid else return status code 401-unauthorized or 422-invalid body)
-- PATCH `/api/pages/:id`
-  - request parameters in body (title,publishedAt,content,image,orders) and id of the page in URL as a param and in header a valid Cookie
-  - response body content (Returns the stored ID if the cookie and request body are valid else return status code 401-unauthorized or 422-invalid body), each user can update pages that owned by himself.
-- DELETE `/api/pages/:id`
-  - request parameters in header a valid Cookie and id of the page in URL as a param
-  - response body content (API return with status code 200), each user can delete pages that owned by himself.
+``` JSON
+{
+    "email": "ali@gmail.com",
+    "password": "testtest"
+}
+```
 
-### 4) Pages `for admins`
+* Response: `201 OK` (success)
+* Response body: authenticated user
 
-- POST `/api/pages/by-admin`
-  - request parameters in body (title,author,publishedAt,content,image,orders)
-  - response body content (Returns the stored ID if the cookie and request body are valid else return status code 401-unauthorized or 401-permission deny or 422-invalid body)
-- PATCH `/api/pages/by-admin/:id`
-  - request parameters in body (title,author,publishedAt,content,image,orders) and id of the page in URL as a param and a valid cookie in header
-  - response body content (Returns the stored ID if the cookie and request body are valid else return status code 401-unauthorized or 422-invalid body), each admin can update any pages.
-- DELETE `/api/pages/by-admin/:id`
-  - request parameters in header a valid Cookie and id of the page in URL as a param
-  - response body content (API return with status code 200), each admin can delete any pages.
+``` JSON
+{
+    "id": 1,
+    "email": "ali@gmail.com",
+    "role": "admin"
+}
+```
 
-### 5) Pages `for authenticated users and admins`
+* Error responses:  `500 Internal Server Error` (generic error), `401 Unauthorized User` (login failed)
 
-- GET `/api/pages/my-blog`
-  - request parameters in header a valid Cookie
-  - response body content, contains all pages that owned by the user.
+#### Check if user is logged in
 
-### 6) Users `for admins`
+* HTTP method: `GET`  URL: `/api/sessions/current`
+* Description: check if current user is logged in and get her data
+* Request body: _None_
+* Response: `200 OK` (success)
 
-- GET `/api/user`
-  - request parameters in header a valid Cookie
-  - response body content, contains all users info(email and id).
+* Response body: authenticated user
+
+``` JSON
+{
+    "id": 1,
+    "email": "ali@gmail.com",
+    "role": "admin"
+}
+```
+
+* Error responses: `500 Internal Server Error` (generic error), `401 Unauthorized User` (user is not logged in or logged out before)
+
+#### Logout
+
+* HTTP method: `DELETE`  URL: `/api/sessions/current`
+* Description: logout current user
+* Request body: _None_
+* Response: `200 OK` (success)
+
+* Response body: _None_
+
+* Error responses: `500 Internal Server Error` (generic error), `401 Unauthorized User` (user is not logged in)
+
+### 2. Pages `for all without authentication`
+Index page
+* HTTP method: `GET`  URL: `/api/pages`
+* Description: Get the full list of pages that published
+* Request body: _None_
+* Response: `200 OK` (success)
+* Response body: Array of objects, each describing one page:
+
+``` JSON
+{
+    "status": true,
+    "data": [
+        {
+            "title": "Node.js vs npm",
+            "image": "http://localhost:3000/images/img-2.jpg",
+            "publishedAt": "2023-06-20",
+            "pageId": 33,
+            "createdAt": "2023-06-24 19:35:25",
+            "authorId": 2,
+            "authorEmail": "mohsen@gmail.com"
+        },
+        ....
+    ]
+}
+```
+
+* Error responses:  `500 Internal Server Error`
+Get a page by id
+* HTTP method: `GET`  URL: `/api/pages/:id`
+* Description: Get the page corresponding to the id
+* Request body: _None_
+* Response: `200 OK` (success)
+* Response body: Array of objects, each describing one page:
+
+``` JSON
+{
+    "status": true,
+    "data": {
+        "id": 33,
+        "title": "Node.js vs npm",
+        "content": "While Node.js is a JavaScript runtime environment, the Node Package Manager or npm is a large part of the Node.js ecosystem.\n\nIt is a package manager that allows the JavaScript and Node.js communities to publish and share their node modules with other people. This makes the application development process faster and more efficient.",
+        "createdAt": "2023-06-24 19:35:25",
+        "publishedAt": "2023-06-20",
+        "author": 2,
+        "image": "http://localhost:3000/images/img-2.jpg",
+        "orders": "{\"orderContent\":3,\"orderTitle\":1,\"orderImage\":2}",
+        "authorEmail": "mohsen@gmail.com"
+    }
+}
+```
+
+* Error responses:  `500 Internal Server Error`, `404 page not found`
+
+### 3. Pages `for authenticated users`
+Create a page
+* HTTP method: `POST`  URL: `/api/pages`
+* Description: Add a page to the pages of the logged in user
+* Request body: credentials of the user who is trying to create a page
+
+``` JSON
+{
+    "title": "node 27",
+    "publishedAt": "2023-06-19",
+    "content": "While Node.js is a JavaScript runtime environment, the Node Package Manager or npm is a large part of the Node.js ecosystem.\n\nIt is a package manager that allows the JavaScript and Node.js communities to publish and share their node modules with other people. This makes the application development process faster and more efficient.",
+    "image": "http://localhost:3000/images/img-2.jpg",
+    "orders": "{\"orderContent\":3,\"orderTitle\":1,\"orderImage\":2}"
+}
+```
+
+* Response: `200 OK` (success)
+* Response body: created page
+
+``` JSON
+{
+    "status": true,
+    "data": 34
+}
+```
+
+* Error responses:  `500 Internal Server Error`, `401 Unauthorized User` 
+Update an existing page
+* HTTP method: `PATCH`  URL: `/api/pages/:id`
+* Description: Update the page corresponding to the id
+* Request body: 
+
+``` JSON
+{
+    "title": "node 29",
+    "publishedAt": "2023-06-19",
+    "content": "While Node.js is a JavaScript runtime environment, the Node Package Manager or npm is a large part of the Node.js ecosystem.\n\nIt is a package manager that allows the JavaScript and Node.js communities to publish and share their node modules with other people. This makes the application development process faster and more efficient.",
+    "image": "http://localhost:3000/images/img-2.jpg",
+    "orders": "{\"orderContent\":3,\"orderTitle\":1,\"orderImage\":2}"
+}
+```
+
+* Response: `200 OK` (success)
+* Response body: 
+``` JSON
+{
+    "status": true
+}
+```
+* Error responses:  `500 Internal Server Error`, `401 Unauthorized User` 
+Delete an existing page
+* HTTP method: `DELETE`  URL: `/api/pages/:id`
+* Description: delete the page corresponding to the id
+* Request body:
+
+``` JSON
+{
+    "title": "node 29",
+    "publishedAt": "2023-06-29",
+    "content": "While Node.js is a JavaScript runtime environment, the Node Package Manager or npm is a large part of the Node.js ecosystem.\n\nIt is a package manager that allows the JavaScript and Node.js communities to publish and share their node modules with other people.",
+    "image": "http://localhost:3000/images/img-3.jpg",
+    "orders": "{\"orderContent\":3,\"orderTitle\":2,\"orderImage\":1}"
+}
+```
+
+* Response: `200 OK` (success)
+* Response body: 
+``` JSON
+{
+    "status": true
+}
+```
+* Error responses:  `500 Internal Server Error`, `401 Unauthorized User` 
+
+
+### 4. Page management
+Create a page
+* HTTP method: `POST`  URL: `/api/pages/by-admin`
+* Description: Add a page to the pages of the user
+* Request body: credentials of the user who is trying to create a page
+
+``` JSON
+{
+    "title": "test",
+    "author": 2,
+    "publishedAt": "2023-06-19",
+    "content": "long text",
+    "image": "http://localhost:3000/images/img-2.jpg",
+    "orders": "{\"orderContent\":3,\"orderTitle\":1,\"orderImage\":2}"
+}
+```
+
+* Response: `200 OK` (success)
+* Response body: created page
+
+``` JSON
+{
+    "status": true,
+    "data": 34
+}
+```
+
+* Error responses:  `500 Internal Server Error`, `401 Unauthorized User` ,`401 permission deny`,`422 Unprocessable Entity`
+Update a page
+* HTTP method: `PATCH`  URL: `/api/pages/by-admin/:id`
+* Description: update a page corresponding to the id
+* Request body:
+
+``` JSON
+{
+    "title": "node #6",
+    "publishedAt": "2023-06-30",
+    "content": "text",
+    "author": 2,
+    "image": "http://loclhost:3001/img2.png",
+    "orders": "{\"orderContent\":3,\"orderTitle\":1,\"orderImage\":2}"
+}
+```
+
+* Response: `200 OK` (success)
+* Response body: updated page
+
+``` JSON
+{
+    "status": true,
+}
+```
+
+* Error responses:  `500 Internal Server Error`, `401 Unauthorized User` ,`401 permission deny`,`422 Unprocessable Entity`
+Delete a page
+* HTTP method: `DELETE`  URL: `/api/pages/by-admin/:id`
+* Description: Delete a page corresponding to the id
+* Request body: _None_
+
+* Response: `200 OK` (success)
+* Response body: 
+
+``` JSON
+{
+    "status": true,
+}
+```
+
+* Error responses:  `500 Internal Server Error`, `401 Unauthorized User` ,`401 permission deny`
+
+### 5. Pages `for authenticated users and admins`
+my blog
+* HTTP method: `GET`  URL: `/api/pages/my-blog`
+* Description: Get the full list of pages that owned by the user
+* Request body: _None_
+* Response: `200 OK` (success)
+* Response body: Array of objects, each describing one page:
+
+``` JSON
+{
+    "status": true,
+    "data": [
+        {
+            "id": 36,
+            "title": "node 27",
+            "content": "long text",
+            "createdAt": "2023-06-25 13:30:27",
+            "publishedAt": "2023-06-19",
+            "author": 1,
+            "image": "http://loclhost:3001/img.png",
+            "orders": "{\"orderContent\":3,\"orderTitle\":1,\"orderImage\":2}"
+        },
+        ....
+    ]
+}
+```
+
+* Error responses:  `500 Internal Server Error` , `401 Unauthorized User`
+
+### 6. Users `for admins`
+* HTTP method: `GET`  URL: `/api/user`
+* Description: Get the full list of users
+* Request body: _None_
+* Response: `200 OK` (success)
+* Response body: Array of objects, each describing a user:
+
+``` JSON
+{
+    "status": true,
+    "data": [
+        {
+            "email": "ali@gmail.com",
+            "id": 1
+        },
+        {
+            "email": "mohsen@gmail.com",
+            "id": 2
+        },
+        {
+            "email": "nazanin@gmail.com",
+            "id": 3
+        },
+        {
+            "email": "satoshi@gmail.com",
+            "id": 4
+        }
+    ]
+}
+```
+
+* Error responses:  `500 Internal Server Error` , `401 Unauthorized User`,`401 Permission Deny`
 
 ## Database Tables
 
@@ -108,8 +379,38 @@
 7. `SingleBlogPage.tsx` : Content of Route `/single-blog/:blogId`
 
 ## Users Credentials
+Here you can find a list of the users already registered inside the provided database.
 
-- ali@gmail.com ,testtest (admin)
-- mohsen@gmail.com, testtest (user)
-- nazanin@gmail.com, testtest (user)
-- satoshi@gmail.com, testtest (user)
+| email            |  password     | role |
+|------------------|---------------|------|
+| ali@gmail.com    | testtest      | admin|
+| mohsen@gmail.com | testtest      | user |
+| nazanin@gmail.com| testtest      | user |
+| satoshi@gmail.com| testtest      | user |
+
+## Screenshots
+
+### login
+this is a farzin cms website in the top of the screen on the right side we can log in to the user account
+![App Screenshot](./server/public/screenshot/1.png)
+
+and then you can enter your username and password, the admin has a different username and password
+![App Screenshot](./server/public/screenshot/2.png)
+
+you  can see that I log in to my admin page and on the website we have an admin page to edit and delete posts and also change authors for blogs
+![App Screenshot](./server/public/screenshot/3.png)
+
+and then at the top of the website at the right, you can log out from the website
+![App Screenshot](./server/public/screenshot/4.png)
+
+this is the part when someone that is not the admin can edit the blog or delete it except the author part
+![App Screenshot](./server/public/screenshot/6.png)
+
+and this is the part when someone that is not an admin can create a new blog
+![App Screenshot](./server/public/screenshot/7.png)
+
+this is one of my blogs
+![App Screenshot](./server/public/screenshot/8.png)
+
+and this is an admin part that can create a blog or editing or deleting, in this part we can also change the author of the blog
+![App Screenshot](./server/public/screenshot/10.png)
