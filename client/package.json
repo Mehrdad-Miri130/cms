@@ -25,7 +25,7 @@
 		"web-vitals": "^2.1.4"
 	},
 	"scripts": {
-		"dev":"PORT=3002 react-scripts start",
+		"dev": "PORT=3002 react-scripts start",
 		"start:windows": "set PORT=3002 && react-scripts start",
 		"start": "PORT=3002 react-scripts start",
 		"build": "PORT=3002 react-scripts build",
@@ -50,7 +50,6 @@
 	},
 	"devDependencies": {
 		"@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-		"@tailwindcss/line-clamp": "^0.4.4",
 		"@types/js-cookie": "^3.0.3",
 		"@typescript-eslint/eslint-plugin": "^5.59.11",
 		"@typescript-eslint/parser": "^5.59.11",
